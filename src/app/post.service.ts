@@ -1,5 +1,7 @@
+import { Data } from '@angular/router';
+import { Timestamp } from 'rxjs/Rx';
 import { Injectable, Inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -13,7 +15,6 @@ export class PostService {
   constructor(private _http: HttpClient) { }
 
   getPosts(): Observable<Post[]> {
-
     /*=========================================================================|
     | Pink Path                                                                |
     |==========================================================================|
@@ -28,11 +29,19 @@ export class PostService {
     |                                                                          |
     |   - Filtro por fecha de publicación: publicationDate_lte=fecha           |
     |   - Ordenación: _sort=publicationDate&_order=DESC                        |
-    |                                                                          |
+    |                                                                          |   LISTO!!!
     | Una pista más, por si acaso: HttpParams.                                 |
     |=========================================================================*/
+    let fecha = Date.now().toString();
+    console.log(fecha);
+    let opciones = {
+      params: new HttpParams()
+                      .set('publicationDate_lte', fecha)
+                      .set('_sort', 'publicationDate')
+                      .set('_order', 'DESC')
+    }
 
-    return this._http.get<Post[]>(`${environment.backendUri}/posts`);
+    return this._http.get<Post[]>(`${environment.backendUri}/posts`, opciones);
   }
 
   getUserPosts(id: number): Observable<Post[]> {
@@ -89,8 +98,13 @@ export class PostService {
     |                                                                          |
     | Una pista más, por si acaso: HttpParams.                                 |
     |=========================================================================*/
+    //this._http.get<Post[]>(`${environment.backendUri}/posts`)
 
-     return this._http.get<Post[]>(`${environment.backendUri}/posts`);
+
+  //  let httpParamsCategory = new HttpParams().set('_sort', 'publicationDate&_order=DESC');
+    
+        
+    return this._http.get<Post[]>(`${environment.backendUri}/posts`);
   }
 
   getPostDetails(id: number): Observable<Post> {
@@ -106,10 +120,10 @@ export class PostService {
     | ruta sobre la cual tienes que hacer la petición POST es '/posts'.        |
     | Recuerda que siempre que se crea una entidad en servidor es una buena    |
     | práctica retornar la misma con los datos actualizados obtenidos tras la  |
-    | inserción.                                                               |
+    | inserción.                                                               |   LISTO!!!
     |=========================================================================*/
 
-    return null;
+   return this._http.post<Post>(`${environment.backendUri}/posts`, post);
   }
 
 }

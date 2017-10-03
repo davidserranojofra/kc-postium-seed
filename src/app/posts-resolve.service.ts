@@ -32,6 +32,6 @@ export class PostsResolveService implements Resolve<Post[]> {
     |=========================================================================*/
 
     return this._postService.getPosts();
-  }
+  } 
 
 }

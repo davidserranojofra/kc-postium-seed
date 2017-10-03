@@ -16,9 +16,9 @@
       | Blue Path                                                                |
       |==========================================================================|
       | Una vez tengas creado el pipe FromNowPipe, úsalo con la fecha de         |
-      | publicación.                                                             |
+      | publicación.                                                             |   LISTO!!!
       |========================================================================-->
-      <span class="date">{{ post.publicationDate }}</span>
+      <span class="date">{{ post.publicationDate | fechahace }}</span>
 
     </div>
   </div>
@@ -34,8 +34,11 @@
   | Yellow Path                                                              |
   |==========================================================================|
   | Suscribe el componente CategoryBoxComponent al evento que hayas definido |
-  | en él para notificar los clics sobre las categorías del post.            |
+  | en él para notificar los clics sobre las categorías del post.            |  LISTO!!!
   |========================================================================-->
-  <app-category-box [categories]="post.categories"></app-category-box>
+  <app-category-box 
+  [categories]="post.categories"
+  (categoriaPulsada)="mostrarCategoria($event)"
+  ></app-category-box>
 
 </div>

@@ -1,8 +1,9 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-
+import { Router } from '@angular/router';
 import { NativeWindow } from '../window';
 import { Post } from '../post';
+import { Category } from '../category';
 
 @Component({
   templateUrl: './post-details.component.html',
@@ -13,6 +14,7 @@ export class PostDetailsComponent implements OnInit {
   post: Post;
 
   constructor(
+    private _router:  Router,
     private _activatedRoute: ActivatedRoute,
     @Inject(NativeWindow) private _window) { }
 
@@ -45,7 +47,9 @@ export class PostDetailsComponent implements OnInit {
   | posts de la categoría indicada. Recuerda que para hacer esto necesitas   |
   | inyectar como dependencia el Router de la app. La ruta a navegar es      |
   | '/posts/categories', pasando como parámetro el identificador de la       |
-  | categoría.                                                               |
+  | categoría.                                                               |  listo!!!!
   |=========================================================================*/
-
+  mostrarCategoria(category: Category) {
+    this._router.navigate(['/posts/categories/', category.id]);
+  }
 }

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 import { Category } from '../category';
 
@@ -18,7 +18,12 @@ export class CategoryBoxComponent {
   | dicho atributo debe permitir la emisión de eventos; la idea es enviar al |
   | componente padre la categoría sobre el cuál se ha hecho clic. Y puesto   |
   | que dicho clic se realiza en el template de este componente, necesitas,  |
-  | además, un manejador para el mismo.                                      |
+  | además, un manejador para el mismo.                                      |    LISTO!!!
   |=========================================================================*/
-
+  @Output() categoriaPulsada = new EventEmitter<Category[]>();
+  
+    notificarLaCategoria(categoria): void {
+        this.categoriaPulsada.emit(categoria);
+        console.log("recibido categoria " + categoria);
+    }
 }
