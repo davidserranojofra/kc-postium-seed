@@ -5,7 +5,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
-
+import { Category } from './category';
 import { environment } from '../environments/environment';
 import { Post } from './post';
 
@@ -33,7 +33,6 @@ export class PostService {
     | Una pista más, por si acaso: HttpParams.                                 |
     |=========================================================================*/
     let fecha = Date.now().toString();
-    console.log(fecha);
     let opciones = {
       params: new HttpParams()
                       .set('publicationDate_lte', fecha)
@@ -63,10 +62,18 @@ export class PostService {
     |   - Filtro por fecha de publicación: publicationDate_lte=fecha           |
     |   - Ordenación: _sort=publicationDate&_order=DESC                        |
     |                                                                          |
-    | Una pista más, por si acaso: HttpParams.                                 |
+    | Una pista más, por si acaso: HttpParams.                                 |   LISTO!!!
     |=========================================================================*/
+    let fecha = Date.now().toString();
 
-     return this._http.get<Post[]>(`${environment.backendUri}/posts`);
+    let opciones = {
+      params: new HttpParams()
+                      .set('author.id', id.toString())
+                      .set('publicationDate_lte', fecha)
+                      .set('_sort', 'publicationDate')
+                      .set('_order', 'DESC')
+    }
+    return this._http.get<Post[]>(`${environment.backendUri}/posts/`, opciones);
   }
 
   getCategoryPosts(id: number): Observable<Post[]> {
@@ -98,13 +105,39 @@ export class PostService {
     |                                                                          |
     | Una pista más, por si acaso: HttpParams.                                 |
     |=========================================================================*/
-    //this._http.get<Post[]>(`${environment.backendUri}/posts`)
+    let fecha = Date.now().toString();
 
+    let opciones = {
+      params: new HttpParams()
+                      .set('publicationDate_lte', fecha)
+                      .set('_sort', 'publicationDate')
+                      .set('_order', 'DESC')
+    }
 
-  //  let httpParamsCategory = new HttpParams().set('_sort', 'publicationDate&_order=DESC');
-    
-        
-    return this._http.get<Post[]>(`${environment.backendUri}/posts`);
+    // let filtro = [];
+
+    // function recorrerCategoria(posts: Post, categoryId: number) {
+    //   posts.categories.forEach((element) => {
+    //     if(element.id === categoryId) {
+    //       filtro.push(posts);
+    //     }
+    //   });
+    // }
+    let filtro = [];
+    return this._http
+            .get<Post[]>(`${environment.backendUri}/posts/`, opciones)
+            .map((posts: Post[]): Post[] => {
+              
+              console.log('todos los posts --> ' + posts);
+              posts.forEach((posts: Post) => {
+                posts.categories.forEach((category: Category) => {
+                  if (category.id == id) {
+                    filtro.push(posts);
+                  }
+                }) 
+              });
+              return filtro;
+            });
   }
 
   getPostDetails(id: number): Observable<Post> {

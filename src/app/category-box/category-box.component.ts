@@ -24,6 +24,5 @@ export class CategoryBoxComponent {
   
     notificarLaCategoria(categoria): void {
         this.categoriaPulsada.emit(categoria);
-        console.log("recibido categoria " + categoria);
     }
 }

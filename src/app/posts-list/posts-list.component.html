@@ -3,7 +3,7 @@
 | Red Path                                                                 |
 |==========================================================================|
 | Suscribe el componente PostPreviewComponent al evento que hayas definido |
-| en él para notificar los clics sobre los autores de los posts.           |
+| en él para notificar los clics sobre los autores de los posts.           |  LISTO!!!
 |========================================================================-->
 
 <!--=======================================================================|
@@ -15,5 +15,6 @@
 
 <app-post-preview *ngFor="let post of posts" 
 [post]="post"
+(autorPulsado)="mostrarAutor($event)"
 (articuloPulsado)="mostrarArticulo($event)" 
 ></app-post-preview>

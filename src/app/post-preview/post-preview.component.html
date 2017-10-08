@@ -7,9 +7,11 @@
     <!--=======================================================================|
     | Red Path                                                                 |
     |==========================================================================|
-    | Un clic sobre el autor debería enviar un evento al componente padre.     |
+    | Un clic sobre el autor debería enviar un evento al componente padre.     |  LISTO!!!
     |========================================================================-->
-    <span class="name blink-font">{{ post.author.name }}</span>
+    <span class="name blink-font"
+    (click)="notificarAutor(post)"
+    >{{ post.author.name }}</span>
 
     <!--=======================================================================|
     | Blue Path                                                                |

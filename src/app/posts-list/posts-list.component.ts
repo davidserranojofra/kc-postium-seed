@@ -20,8 +20,11 @@ export class PostsListComponent {
   | selección del autor de un post y navega a la dirección correspondiente.  |
   | Recuerda que para hacer esto necesitas inyectar como dependencia el      |
   | Router de la app. La ruta a navegar es '/posts/users', pasando como      |
-  | parámetro el identificador del autor.                                    |
+  | parámetro el identificador del autor.                                    |  LISTO!!!
   |=========================================================================*/
+  mostrarAutor(post) {
+    this._router.navigate(['/posts/users', post.author.id]);
+  }
 
   /*=========================================================================|
   | Green Path                                                               |
