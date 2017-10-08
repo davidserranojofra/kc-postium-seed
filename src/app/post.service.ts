@@ -103,7 +103,7 @@ export class PostService {
     |   - Filtro por fecha de publicación: publicationDate_lte=fecha           |
     |   - Ordenación: _sort=publicationDate&_order=DESC                        |
     |                                                                          |
-    | Una pista más, por si acaso: HttpParams.                                 |
+    | Una pista más, por si acaso: HttpParams.                                 | LISTO!!!
     |=========================================================================*/
     let fecha = Date.now().toString();
 
