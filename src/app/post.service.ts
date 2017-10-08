@@ -103,7 +103,7 @@ export class PostService {
     |   - Filtro por fecha de publicación: publicationDate_lte=fecha           |
     |   - Ordenación: _sort=publicationDate&_order=DESC                        |
     |                                                                          |
-    | Una pista más, por si acaso: HttpParams.                                 | LISTO!!!
+    | Una pista más, por si acaso: HttpParams.                                 |  LISTO!!!
     |=========================================================================*/
     let fecha = Date.now().toString();
 
@@ -114,15 +114,6 @@ export class PostService {
                       .set('_order', 'DESC')
     }
 
-    // let filtro = [];
-
-    // function recorrerCategoria(posts: Post, categoryId: number) {
-    //   posts.categories.forEach((element) => {
-    //     if(element.id === categoryId) {
-    //       filtro.push(posts);
-    //     }
-    //   });
-    // }
     let filtro = [];
     return this._http
             .get<Post[]>(`${environment.backendUri}/posts/`, opciones)
